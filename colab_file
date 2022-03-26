@@ -1,0 +1,73 @@
+from pandas import *
+# import pandas as pd
+import requests
+import warnings
+import time
+import numpy as np
+warnings.filterwarnings("ignore")
+
+-----------------------------------------
+for i in range(9,58):
+  praveen.loc[i,'S.No':]=praveen.loc[i,'S.No':].shift(0)
+  
+  
+  
+  from sklearn.preprocessing import LabelEncoder
+  
+  le=LabelEncoder()
+df['job_type_chng']=le.fit_transform(df['job_type'])
+
+----------------------------------------------------
+
+
+df['job_type_chng']=df['job_type_chng'].replace(39,np.NaN)
+df['job_type_chng'].isnull().sum()
+-----------------------------------------------------
+from sklearn.experimental import enable_iterative_imputer
+from sklearn.impute import IterativeImputer
+from sklearn.impute import KNNImputer
+
+---------------------------------------------------# impu=IterativeImputer()
+knn=KNNImputer()
+y=np.array(df['job_type_chng']).reshape(-1,1)
+x=knn.fit_transform(y)
+
+------------------------------------------------------------
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2)
+
+---------------------------------------------------------------------
+from sklearn.linear_model import LinearRegression
+lr=LinearRegression()
+lr.fit(x_train,y_train)
+print(lr.score(x_test,y_test)*100)
+lr.predict(d)
+-----------------------------------------------------------------
+from sklearn import svm
+regr=svm.SVR()
+regr.fit(x_train,y_train)
+print(regr.score(x_test,y_test)*100)
+regr.predict(d)
+----------------------------------------------------------------
+from sklearn.ensemble import RandomForestRegressor
+rfr=RandomForestRegressor(max_depth=100,n_estimators=100)
+rfr.fit(x_train,y_train)
+print(rfr.score(x_test,y_test)*100)
+rfr.predict(d)
+
+
+
+
+--------------------------------------------------------------
+from sklearn.neighbors import KNeighborsRegressor
+knn=KNeighborsRegressor(n_neighbors=50,weights='distance')
+knn.fit(x_train,y_train)
+print(knn.score(x_test,y_test)*100)
+fill=knn.predict(d)
+fill
+---------------------------------------------------------
+from sklearn.tree import DecisionTreeRegressor
+dtr=DecisionTreeRegressor()
+dtr.fit(x_train,y_train)
+print(dtr.score(x_test,y_test)*100)
+dtr.predict(d)
